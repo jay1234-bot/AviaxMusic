@@ -20,14 +20,10 @@ from config import API_URL, VIDEO_API_URL, API_KEY
 
 
 def cookie_txt_file():
-    cookie_dir = f"{os.getcwd()}/cookies"
-    if not os.path.exists(cookie_dir):
+    cookie_path = os.path.join(os.getcwd(), "cookies.txt")
+    if not os.path.exists(cookie_path):
         return None
-    cookies_files = [f for f in os.listdir(cookie_dir) if f.endswith(".txt")]
-    if not cookies_files:
-        return None
-    cookie_file = os.path.join(cookie_dir, random.choice(cookies_files))
-    return cookie_file
+    return cookie_path
 
 
 async def download_song(link: str):
@@ -596,4 +592,5 @@ class YouTubeAPI:
             direct = True
             downloaded_file = await download_song(link)
         return downloaded_file, direct
+
 
