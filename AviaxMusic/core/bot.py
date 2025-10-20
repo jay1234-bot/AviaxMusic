@@ -1,7 +1,11 @@
 import sys
+
+# Ensure event loop is set before importing Pyrogram
 if sys.platform != "win32":
+    import asyncio
     import uvloop
-    uvloop.install()
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
